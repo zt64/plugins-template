@@ -41,8 +41,8 @@ jobs:
           chmod +x ./gradlew
           ./gradlew make :generateUpdaterJson
           
-          rm $GITHUB_WORKSPACE/builds/*.zip
-          cp $GITHUB_WORKSPACE/src/**/build/outputs/*.zip $GITHUB_WORKSPACE/builds/
+          rm -f $GITHUB_WORKSPACE/builds/*.zip
+          find $GITHUB_WORKSPACE/src -name "*.zip" -path "*/build/outputs/*" -exec cp {} $GITHUB_WORKSPACE/builds/ \;
           cp $GITHUB_WORKSPACE/src/build/outputs/updater.json $GITHUB_WORKSPACE/builds/
 
       - name: Push builds
